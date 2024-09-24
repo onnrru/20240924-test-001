@@ -2,20 +2,21 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <!-- UTF-8 문자 인코딩 설정, 다양한 언어를 지원 -->
+    <!-- UTF-8 문자 인코딩을 설정하여 한글을 제대로 표현할 수 있게 합니다 -->
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- 뷰포트 설정: 모바일 화면에 맞게 크기를 조정 -->
-
+    <!-- 뷰포트 설정: 모바일 디바이스에서도 페이지가 잘 표시되도록 합니다 -->
+    <!-- width=device-width는 기기의 너비에 맞추고, initial-scale=1.0은 100% 비율로 표시 -->
+    
     <title>게시판</title>
-    <!-- 브라우저 탭에 표시될 제목 -->
+    <!-- 브라우저 탭에 표시될 제목을 설정합니다 -->
 
     <style>
-        /* 전체 레이아웃 스타일 설정 */
+        /* body 스타일 설정: 페이지 기본 스타일 */
         body {
-            font-family: Arial, sans-serif; /* 글꼴을 Arial로 설정 */
+            font-family: Arial, sans-serif; /* 기본 글꼴을 Arial로 설정 */
             background-color: #f4f4f4; /* 배경색을 밝은 회색으로 설정 */
-            padding: 20px; /* 페이지 전체 패딩 추가 */
+            padding: 20px; /* 전체 패딩을 20px로 설정 */
         }
 
         /* 게시판 제목 스타일 */
@@ -26,15 +27,15 @@
 
         /* 게시글 목록 스타일 */
         .post-list {
-            list-style: none; /* 목록에 기본적으로 나타나는 점을 제거 */
-            padding: 0; /* 목록의 기본 패딩 제거 */
-            margin-top: 20px; /* 제목과 목록 사이에 여백 추가 */
+            list-style: none; /* 목록에서 기본 불릿 점 제거 */
+            padding: 0; /* 기본 패딩 제거 */
+            margin-top: 20px; /* 상단에 20px 여백 추가 */
         }
 
         /* 개별 게시글 스타일 */
         .post-item {
-            background-color: white; /* 게시글 배경을 흰색으로 설정 */
-            margin-bottom: 10px; /* 게시글 간격을 10px로 설정 */
+            background-color: white; /* 배경색을 흰색으로 설정 */
+            margin-bottom: 10px; /* 게시글 간 간격을 10px로 설정 */
             padding: 15px; /* 게시글 내부 여백 설정 */
             border-radius: 5px; /* 게시글 모서리를 둥글게 설정 */
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* 약간의 그림자 추가 */
@@ -42,31 +43,31 @@
 
         /* 게시글 제목 스타일 */
         .post-item a {
-            text-decoration: none; /* 링크 밑줄 제거 */
-            font-size: 18px; /* 글자 크기 설정 */
+            text-decoration: none; /* 링크의 밑줄을 제거 */
+            font-size: 18px; /* 글자 크기를 18px로 설정 */
             color: #333; /* 글자 색상을 어두운 회색으로 설정 */
         }
 
-        /* 게시글 미리보기 내용 스타일 */
+        /* 게시글 미리보기 스타일 */
         .post-item p {
-            color: #666; /* 글 내용 색상을 밝은 회색으로 설정 */
-            margin-top: 5px; /* 제목과 내용 사이의 여백 설정 */
+            color: #666; /* 글 색상을 밝은 회색으로 설정 */
+            margin-top: 5px; /* 제목과 내용 사이의 간격을 5px로 설정 */
         }
 
         /* 글쓰기 버튼 스타일 */
         .write-button {
-            display: block; /* 버튼을 블록으로 설정 (가로 전체를 차지) */
-            width: 100px; /* 버튼 너비 설정 */
-            margin: 20px auto; /* 중앙 정렬을 위해 상하 좌우에 자동 여백 */
-            padding: 10px 20px; /* 버튼 안쪽 여백 설정 */
-            background-color: #4CAF50; /* 버튼 배경을 녹색으로 설정 */
-            color: white; /* 버튼 글자 색상을 흰색으로 설정 */
-            text-align: center; /* 텍스트를 가운데 정렬 */
+            display: block; /* 버튼을 블록 요소로 설정해 가로 전체를 차지 */
+            width: 100px; /* 버튼 너비를 100px로 설정 */
+            margin: 20px auto; /* 위아래 20px, 좌우 자동 여백으로 중앙 정렬 */
+            padding: 10px 20px; /* 버튼 내부 여백 설정 */
+            background-color: #4CAF50; /* 버튼 배경색을 녹색으로 설정 */
+            color: white; /* 글자 색상을 흰색으로 설정 */
+            text-align: center; /* 텍스트를 중앙 정렬 */
             text-decoration: none; /* 링크 밑줄 제거 */
-            border-radius: 5px; /* 버튼 모서리를 둥글게 설정 */
+            border-radius: 5px; /* 모서리를 둥글게 설정 */
         }
 
-        /* 글쓰기 버튼에 마우스를 올렸을 때 */
+        /* 버튼에 마우스를 올렸을 때 */
         .write-button:hover {
             background-color: #45a049; /* 버튼 배경을 어두운 녹색으로 변경 */
         }
@@ -74,47 +75,54 @@
 </head>
 <body>
 
-    <!-- 게시판 제목 -->
     <h1>게시판</h1>
+    <!-- 게시판 제목 -->
 
-    <!-- 게시글 목록 -->
     <ul class="post-list" id="postList">
         <!-- 게시글 목록이 동적으로 추가될 예정입니다 -->
     </ul>
 
-    <!-- 글쓰기 버튼 -->
+    <!-- 글쓰기 페이지로 이동하는 버튼 -->
     <a href="write.html" class="write-button">글쓰기</a>
-    <!-- 버튼을 클릭하면 write.html 페이지로 이동 -->
 
     <script>
-        // 게시글 목록을 저장하는 임시 배열
-        const posts = [
-            { id: 1, title: "첫 번째 게시글", content: "이것은 첫 번째 게시글의 내용입니다." },
-            { id: 2, title: "두 번째 게시글", content: "두 번째 게시글의 미리보기 내용입니다." }
-        ];
+        // 게시글 목록을 불러오는 함수
+        async function loadPosts() {
+            try {
+                // Netlify Function으로부터 게시글 목록을 fetch로 불러옵니다.
+                const response = await fetch('/20240924-test-001/functions/getPosts');
+                // 서버로부터 받은 데이터를 JSON 형식으로 파싱합니다.
+                const posts = await response.json();
 
-        // 게시글 목록을 담을 리스트 요소 가져오기
-        const postList = document.getElementById('postList');
+                // 게시글 목록을 표시할 ul 요소를 가져옵니다.
+                const postList = document.getElementById('postList');
+                postList.innerHTML = ''; // 기존 목록 초기화
 
-        // 게시글 목록을 동적으로 추가하는 함수
-        function renderPosts() {
-            posts.forEach(post => {
-                const postItem = document.createElement('li'); // li 요소 생성
-                postItem.classList.add('post-item'); // li에 클래스 추가
-
-                // 게시글 제목과 내용을 포함한 HTML 생성
-                postItem.innerHTML = `
-                    <a href="post.html?id=${post.id}">${post.title}</a>
-                    <p>${post.content.slice(0, 50)}...</p> <!-- 내용은 50글자까지만 미리보기 -->
-                `;
-                
-                postList.appendChild(postItem); // 생성한 li를 목록에 추가
-            });
+                if (posts.length === 0) {
+                    // 게시글이 없을 때 표시할 메시지
+                    postList.innerHTML = '<p>게시글이 없습니다. 글을 작성해 주세요.</p>';
+                } else {
+                    // 게시글 목록을 순회하여 화면에 추가합니다.
+                    posts.forEach(post => {
+                        const postItem = document.createElement('li');
+                        postItem.classList.add('post-item'); // li 요소에 클래스 추가
+                        postItem.innerHTML = `
+                            <a href="#">${post.title}</a>
+                            <p>${post.content.slice(0, 50)}...</p>
+                        `;
+                        postList.appendChild(postItem); // 게시글을 목록에 추가
+                    });
+                }
+            } catch (error) {
+                // 게시글을 불러오는 도중 에러가 발생한 경우
+                console.error('게시글을 불러오는 중 오류가 발생했습니다:', error);
+            }
         }
 
-        // 페이지 로드 시 게시글 목록을 렌더링
-        renderPosts();
+        // 페이지가 로드될 때 게시글 목록을 불러옵니다.
+        loadPosts();
     </script>
 
 </body>
 </html>
+
