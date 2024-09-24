@@ -90,7 +90,7 @@
         async function loadPosts() {
             try {
                 // Netlify Function으로부터 게시글 목록을 fetch로 불러옵니다.
-                const response = await fetch('/20240924-test-001/functions/getPosts');
+                const response = await fetch('/functions/getPosts');
                 // 서버로부터 받은 데이터를 JSON 형식으로 파싱합니다.
                 const posts = await response.json();
 
