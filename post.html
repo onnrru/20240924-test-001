@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>게시글 보기</title>
+    
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #202124;
+            color: white;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            color: white;
+        }
+
+        .post-container {
+            width: 80%;
+            margin: 0 auto;
+            background-color: #333;
+            padding: 20px;
+            border-radius: 5px;
+        }
+
+        .post-title {
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+
+        .post-content {
+            font-size: 1.2rem;
+            line-height: 1.6;
+        }
+
+        .back-button {
+            display: block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #4285f4;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            text-align: center;
+            text-decoration: none;
+        }
+
+        .back-button:hover {
+            background-color: #357ae8;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>게시글 보기</h1>
+
+    <div class="post-container" id="postContainer">
+        <!-- 개별 게시글이 여기에 동적으로 추가됩니다 -->
+    </div>
+
+    <a href="board.html" class="back-button">목록으로 돌아가기</a>
+
+    <script>
+        // URL에서 게시글 ID를 가져오는 함수
+        function getPostIdFromUrl() {
+            const params = new URLSearchParams(window.location.search);
+            return params.get('id');
+        }
+
+        // 게시글을 서버에서 불러오는 함수
+        async function fetchPost() {
+            const postId = getPostIdFromUrl(); // URL에서 게시글 ID를 가져옵니다.
+            const response = await fetch('/.netlify/functions/getPost?id=' + postId);
+            const post = await response.json();
+
+            const postContainer = document.getElementById('postContainer');
+            postContainer.innerHTML = `
+                <div class="post-title">${post.title}</div>
+                <div class="post-content">${post.content}</div>
+            `;
+        }
+
+        // 페이지가 로드되면 게시글을 불러옵니다.
+        fetchPost();
+    </script>
+
+</body>
+</html>
