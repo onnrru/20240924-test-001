@@ -89,7 +89,7 @@
 
             try {
                 // Netlify Functions로 POST 요청을 보내 게시글 저장
-                const response = await fetch('/functions/savePost', {
+                const response = await fetch('/.netlify/functions/savePost', {
                     method: 'POST', // POST 메소드 사용
                     headers: {
                         'Content-Type': 'application/json', // 요청 본문이 JSON 형식임을 알림
