@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <!-- UTF-8 문자 인코딩 설정, 다양한 언어 지원 -->
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- 뷰포트 설정: 모바일 화면에 맞게 크기를 조정 -->
+    
+    <title>글 작성</title>
+    <!-- 브라우저 탭에 표시될 제목 -->
+
+    <style>
+        /* 전체 레이아웃 스타일 설정 */
+        body {
+            font-family: Arial, sans-serif; /* 기본 글꼴 설정 */
+            background-color: #f4f4f4; /* 배경색을 밝은 회색으로 설정 */
+            padding: 20px; /* 페이지에 여백 추가 */
+        }
+
+        /* 글 작성 제목 스타일 */
+        h1 {
+            text-align: center; /* 중앙 정렬 */
+            color: #333; /* 제목 색상 설정 */
+        }
+
+        /* 폼 전체 컨테이너 */
+        .form-container {
+            width: 80%; /* 페이지 너비의 80% */
+            margin: 0 auto; /* 가운데 정렬 */
+            background-color: white; /* 배경색을 흰색으로 설정 */
+            padding: 20px; /* 컨테이너 안쪽 여백 */
+            border-radius: 5px; /* 모서리를 둥글게 설정 */
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* 약간의 그림자 추가 */
+        }
+
+        /* 폼의 각 필드 스타일 */
+        .form-group {
+            margin-bottom: 15px; /* 필드 사이 여백 추가 */
+        }
+
+        /* 각 필드에 대한 레이블 스타일 */
+        .form-group label {
+            display: block; /* 레이블을 블록 요소로 설정 */
+            font-weight: bold; /* 글꼴을 굵게 설정 */
+            margin-bottom: 5px; /* 레이블 아래 여백 추가 */
+        }
+
+        /* 입력 필드 스타일 */
+        .form-group input, .form-group textarea {
+            width: 100%; /* 입력 필드를 가로 전체 너비로 설정 */
+            padding: 10px; /* 필드 내부 여백 */
+            font-size: 16px; /* 글자 크기 설정 */
+            border: 1px solid #ccc; /* 테두리 색상 설정 */
+            border-radius: 5px; /* 필드 모서리를 둥글게 설정 */
+        }
+
+        /* 작성 완료 버튼 스타일 */
+        .submit-button {
+            width: 100%; /* 버튼 너비를 가로 전체로 설정 */
+            padding: 15px; /* 버튼 안쪽 여백 */
+            background-color: #4CAF50; /* 버튼 배경을 녹색으로 설정 */
+            color: white; /* 버튼 텍스트 색상을 흰색으로 설정 */
+            font-size: 18px; /* 버튼 텍스트 크기 설정 */
+            border: none; /* 버튼 테두리 제거 */
+            border-radius: 5px; /* 버튼 모서리를 둥글게 설정 */
+            cursor: pointer; /* 마우스를 올렸을 때 포인터로 변경 */
+        }
+
+        /* 작성 완료 버튼에 마우스를 올렸을 때 */
+        .submit-button:hover {
+            background-color: #45a049; /* 버튼 배경색을 어두운 녹색으로 변경 */
+        }
+    </style>
+</head>
+<body>
+
+    <h1>글 작성</h1>
+
+    <div class="form-container">
+        <!-- 글 작성 폼 -->
+        <form id="writeForm">
+            <!-- 제목 입력 필드 -->
+            <div class="form-group">
+                <label for="title">제목</label>
+                <input type="text" id="title" name="title" required placeholder="제목을 입력하세요">
+            </div>
+
+            <!-- 내용 입력 필드 -->
+            <div class="form-group">
+                <label for="content">내용</label>
+                <textarea id="content" name="content" rows="10" required placeholder="내용을 입력하세요"></textarea>
+            </div>
+
+            <!-- 작성 완료 버튼 -->
+            <button type="submit" class="submit-button">작성 완료</button>
+        </form>
+    </div>
+
+    <script>
+        // 폼이 제출될 때 실행되는 함수
+        document.getElementById('writeForm').addEventListener('submit', function(e) {
+            e.preventDefault(); // 폼의 기본 제출 동작을 막음
+
+            // 입력된 제목과 내용을 가져옴
+            const title = document.getElementById('title').value;
+            const content = document.getElementById('content').value;
+
+            // 새로운 게시글 객체 생성
+            const newPost = { id: Date.now(), title, content };
+
+            // 로컬 스토리지에서 기존 게시글 목록을 가져옴 (없으면 빈 배열)
+            const posts = JSON.parse(localStorage.getItem('posts')) || [];
+
+            // 새로운 게시글을 배열에 추가
+            posts.push(newPost);
+
+            // 업데이트된 게시글 목록을 다시 로컬 스토리지에 저장
+            localStorage.setItem('posts', JSON.stringify(posts));
+
+            // 작성 후 게시판 페이지로 이동
+            window.location.href = 'board.html';
+        });
+    </script>
+
+</body>
+</html>
